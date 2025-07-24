@@ -19,10 +19,10 @@ jobs:
                 python-version: '3.9'
     
             - name: Make Script Executable
-              run: chmod +x setup_dbt_env.sh
+              run: chmod +x scritps/setup_dbt_env.sh
             
             - name: Create Python Virtual Environment and install DBT
-              run: ./setup_dbt_env.sh
+              run: ./scritps/setup_dbt_env.sh
               
             - name: Pipeline status
               run: echo "the job status is ${{ job.status }}"
