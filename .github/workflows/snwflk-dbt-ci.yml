@@ -25,16 +25,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Create Python Virtual Environment and install DBT
-              run: |
-                python -m venv dbt-env
-                source dbt-env/bin/activate
-                pip install --upgrade pip
-                pip install dbt-snowflake
-                dbt --version
-            
-            # - name: DBT version
-            #   run: |
-            #     dbt --version
-
+              run: ./setup_dbt_env.sh
+              
             - name: Pipeline status
               run: echo "the job status is ${{ job.status }}"
