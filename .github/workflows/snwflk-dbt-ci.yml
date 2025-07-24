@@ -4,7 +4,8 @@ on:
     push:
         branches:
             - main
-
+    # Allow to run this workflow manually from the Actions Tab
+    workflow_dispatch:
 
 jobs:
     dbt-ci-jobs:
