@@ -7,23 +7,17 @@ on:
 
 
 jobs:
-    checkout-jobs:
+    dbt-ci-jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
 
-    python-setup:
-        runs-on: ubuntu-latest
-        steps:
             - name: Installing Python
               uses: actions/setup-python@v5
               with:
                 python-version: '3.9'
     
-    viru-dbt-env:
-        runs-on: ubuntu-latest
-        steps:
             - name: Create Python Virtual Environment and install DBT
               run: ./setup_dbt_env.sh
               
