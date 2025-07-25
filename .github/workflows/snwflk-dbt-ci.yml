@@ -3,7 +3,8 @@ name: Snowflake DBT models
 on:
     push:
         branches:
-            - main
+            - ! main
+            - feature/*
     # Allow to run this workflow manually from the Actions Tab
     workflow_dispatch:
 
