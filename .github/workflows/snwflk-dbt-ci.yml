@@ -83,7 +83,8 @@ jobs:
                 echo "      database: ${{ secrets.SNOWFLAKE_DATABASE }}" >> ~/.dbt/profiles.yml
                 echo "      warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}" >> ~/.dbt/profiles.yml
                 echo "      schema: ${{ secrets.SNOWFLAKE_SCHEMA }}" >> ~/.dbt/profiles.yml
-                echo "      private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}" >> ~/.dbt/profiles.yml
+                echo "      private_key: |" >> ~/.dbt/profiles.yml
+                echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}" | sed 's/^/        /' >> ~/.dbt/profiles.yml
                 echo "      threads: 1" >> ~/.dbt/profiles.yml
                 echo "      client_session_keep_alive: False" >> ~/.dbt/profiles.yml
 
