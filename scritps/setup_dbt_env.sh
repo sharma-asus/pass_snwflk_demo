@@ -55,7 +55,18 @@ fi
 
 ##################################################
 ##################################################
-#dbt run --select my_first_dbt_model
-pwd
-ls -lrth
+
+# Create ~/.dbt directory and add profiles.yml
+mkdir -p ~/.dbt
+echo "$DBT_PROFILE_YML" > ~/.dbt/profiles.yml
+if [ $? -ne 0 ]; then
+    echo "Failed to create ~/.dbt/profiles.yml. Please check the DBT_PROFILE_YML variable."
+    exit 1
+else
+    echo "Created ~/.dbt/profiles.yml successfully."
+fi
+
+##################################################
+##########Initialize a new dbt project
+dbt run --select my_first_dbt_model --profiles-dir ~/.dbt
 

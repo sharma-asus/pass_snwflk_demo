@@ -10,7 +10,6 @@ on:
 jobs:
     dbt-ci-jobs:
         runs-on: ubuntu-latest
-        environment: uat
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -20,15 +19,56 @@ jobs:
               with:
                 python-version: '3.9'
     
-            - name: Make Script Executable
-              run: chmod +x scritps/setup_dbt_env.sh
+            # - name: Make Script Executable
+            #   run: chmod +x scritps/setup_dbt_env.sh
             
-            - name: Create Python Virtual Environment and install DBT
+            # - name: Create Python Virtual Environment and install DBT
+            #   run: bash /scritps/setup_dbt_env.sh
+            #   env:
+            #     SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+            #     SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+            #     SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+            #     SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+            #     SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+            #     SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+            #     SNOWFLAKE_PRIVATE_KEY_RAW: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
+            #     SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
+            
+            - name: Running the shell script
+              shell: bash
               run: |
-                ./scritps/setup_dbt_env.sh
-                source dbt-env/bin/activate
-                dbt run --select my_first_dbt_model
-
+                #!/bin/bash
+                ###########exit immediately if a command exits with a non-zero status
+                set -e
+                ###########fail the script if any command in a pipeline fails
+                set -o pipefail
+                echo "Starting DBT Setup script"
+                if ! command -v python &> /dev/null; the
+                    echo "Python is not installed. Please install Python and try again."
+                    exit 1
+                else
+                    echo "Python is installed. $(python --version)"
+                    python -m venv dbt-env
+                fi
+                if [ -d "dbt-env" ]; then
+                    echo "Virtual environment created successfully."
+                else
+                    echo "Failed to create virtual environment."
+                    exit 1
+                fi
+                if ! command -v dbt &> /dev/null; then
+                    echo "DBT is not installed. Installing DBT..."
+                    source dbt-env/bin/activate
+                    pip install dbt-snowflake
+                else
+                    echo "DBT is already installed."
+                fi
+                if ! command -v dbt &> /dev/null; then
+                    echo "DBT installation failed. Please check the installation process."
+                    exit 1
+                else
+                    echo "DBT is installed successfully. $(dbt --version)"
+                fi
             - name: List files in the repository
               run: |
                ls ${{ github.workspace }}
