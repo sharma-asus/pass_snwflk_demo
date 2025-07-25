@@ -25,6 +25,10 @@ jobs:
             
             - name: Create Python Virtual Environment and install DBT
               run: ./scritps/setup_dbt_env.sh
+
+            - name: List files in the repository
+              run: |
+               ls ${{ github.workspace }}
               
             - name: Run DBT model with debug
               run: dbt run --select my_first_dbt_model
