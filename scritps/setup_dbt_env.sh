@@ -65,7 +65,7 @@ pass_snwflk_demo:
     dev:
       type: snowflake
       account: ${SNOWFLAKE_ACCOUNT}
-      user: user: ${SNOWFLAKE_USER}
+      user: ${SNOWFLAKE_USER}
       role: ${SNOWFLAKE_DATABASE}
       database: ${SNOWFLAKE_DATABASE}
       warehouse: ${SNOWFLAKE_WAREHOUSE}
