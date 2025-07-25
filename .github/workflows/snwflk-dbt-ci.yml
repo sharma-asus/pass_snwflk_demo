@@ -10,6 +10,7 @@ on:
 jobs:
     dbt-ci-jobs:
         runs-on: ubuntu-latest
+        environment: uat
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -25,5 +26,9 @@ jobs:
             - name: Create Python Virtual Environment and install DBT
               run: ./scritps/setup_dbt_env.sh
               
+            - name: Run DBT model with debug
+              run: |
+                dbt run --select my_first_dbt_model
+
             - name: Pipeline status
               run: echo "the job status is ${{ job.status }}"
