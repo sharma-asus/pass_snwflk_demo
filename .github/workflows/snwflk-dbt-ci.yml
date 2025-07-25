@@ -10,6 +10,7 @@ on:
 jobs:
     dbt-ci-jobs:
         runs-on: ubuntu-latest
+        environment: dev
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -69,6 +70,22 @@ jobs:
                 else
                     echo "DBT is installed successfully. $(dbt --version)"
                 fi
+
+                mkdir -p ~/.dbt
+                cat > ~/.dbt/profiles.yml <<EOF
+                pass_snwflk_demo:
+                  target: dev
+                  outputs:
+                    dev:
+                      type: snowflake
+                      account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+                      user: ${{ secrets.SNOWFLAKE_USER }}
+                      role: ${{ secrets.SNOWFLAKE_ROLE }}
+                      database: ${{ secrets.SNOWFLAKE_DATABASE }}
+                      warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+                      schema: ${{ secrets.SNOWFLAKE_SCHEMA }}
+                      private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
+
             - name: List files in the repository
               run: |
                ls ${{ github.workspace }}
