@@ -58,15 +58,30 @@ fi
 
 # Create ~/.dbt directory and add profiles.yml
 mkdir -p ~/.dbt
-echo "$DBT_PROFILE_YML" > ~/.dbt/profiles.yml
-if [ $? -ne 0 ]; then
+cat <<EOF > ~/.dbt/profiles.yml
+pass_snwflk_demo:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: ${SNOWFLAKE_ACCOUNT}
+      user: user: ${SNOWFLAKE_USER}
+      role: ${SNOWFLAKE_DATABASE}
+      database: ${SNOWFLAKE_DATABASE}
+      warehouse: ${SNOWFLAKE_WAREHOUSE}
+      schema: ${SNOWFLAKE_SCHEMA}
+      private_key: |
+$(echo "${SNOWFLAKE_PRIVATE_KEY_RAW}" | sed 's/^/        /')
+        threads: 1
+        client_session_keep_alive: FALSE   
+EOF
+
+# Check if the profiles.yml file was created successfully
+if [ ! -f ~/.dbt/profiles.yml ]; then
     echo "Failed to create ~/.dbt/profiles.yml. Please check the DBT_PROFILE_YML variable."
     exit 1
 else
-    echo "Created ~/.dbt/profiles.yml successfully."
+    echo "DBT profiles.yml created successfully at ~/.dbt/profiles.yml"
 fi
 
-##################################################
-##########Initialize a new dbt project
-dbt run --select my_first_dbt_model --profiles-dir ~/.dbt
 
