@@ -85,7 +85,7 @@ jobs:
                       warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
                       schema: ${{ secrets.SNOWFLAKE_SCHEMA }}
                       private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
-                
+                EOF
                 dbt debug 
 
             - name: List files in the repository
