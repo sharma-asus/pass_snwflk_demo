@@ -1,6 +1,6 @@
 # pass_snwflk_demo
 
-## You can specify Snowflake credentials in system environment variables instead of in configuration files. You can use the following generic environment variables only to specify connection parameters:
+### You can specify Snowflake credentials in system environment variables instead of in configuration files. You can use the following generic environment variables only to specify connection parameters:
 
 SNOWFLAKE_ACCOUNT
 
