@@ -24,7 +24,7 @@ jobs:
               run: chmod +x scritps/setup_dbt_env.sh
             
             - name: Create Python Virtual Environment and install DBT
-              run: bash /scritps/setup_dbt_env.sh
+              run: ./scritps/setup_dbt_env.sh
               env:
                 SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
                 SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
