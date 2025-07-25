@@ -55,4 +55,4 @@ fi
 
 ##################################################
 ##################################################
-dbt run --select my_first_dbt_model
+#dbt run --select my_first_dbt_model
