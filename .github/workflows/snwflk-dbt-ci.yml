@@ -7,11 +7,20 @@ on:
     #         - feature/*
     # Allow to run this workflow manually from the Actions Tab
     workflow_dispatch:
+      inputs:
+        target_env:
+          description: 'select the environment'
+          required: true
+          default: 'dev'
+          type: choice
+          options:
+            - dev
+            - prod
 
 jobs:
     dbt-ci-jobs:
         runs-on: ubuntu-latest
-        environment: dev
+        environment: ${{ github.event.inputs.target_env}}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
