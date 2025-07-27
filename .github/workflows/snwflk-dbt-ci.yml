@@ -20,8 +20,8 @@ on:
 jobs:
     dbt-ci-jobs:
         runs-on: ubuntu-latest
-        environment: ${{ github.event.inputs.target_env}}
-        steps:
+        environment: ${{ github.event.inputs.target_env }}
+        steps: 
             - name: Checkout code
               uses: actions/checkout@v4
 
