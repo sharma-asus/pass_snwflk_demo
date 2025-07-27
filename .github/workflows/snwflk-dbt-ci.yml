@@ -1,27 +1,27 @@
 name: Snowflake DBT models
 
 on:
-    push:
-        branches:
-            - ! main
-            - feature/*
+    # push:
+    #     branches:
+    #         - ! main
+    #         - feature/*
     # Allow to run this workflow manually from the Actions Tab
     workflow_dispatch:
-      # inputs:
-      #   target_env:
-      #     description: 'select the environment'
-      #     required: true
-      #     default: 'dev'
-      #     type: choice
-      #     options:
-      #       - dev
-      #       - prod
+      inputs:
+        target_env:
+          description: 'select the environment'
+          required: true
+          default: 'dev'
+          type: choice
+          options:
+            - dev
+            - prod
 
 jobs:
     dbt-ci-jobs:
         runs-on: ubuntu-latest
-        # environment: ${{ github.event.inputs.target_env }}
-        environment: dev
+        environment: ${{ github.event.inputs.target_env }}
+        # environment: dev
         steps: 
             - name: Checkout code
               uses: actions/checkout@v4
