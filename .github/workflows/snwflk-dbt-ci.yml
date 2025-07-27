@@ -19,15 +19,15 @@ on:
             - dev
             - prod
 
-        # For selecting the Branch to run the workflow
-        target_branch:
-          description: 'select the branch'
-          required: true
-          default: 'feature/model-deploy'
-          type: choice
-          options:
-            - feature/model-deploy
-            - main
+        # # For selecting the Branch to run the workflow
+        # target_branch:
+        #   description: 'select the branch'
+        #   required: true
+        #   default: 'feature/model-deploy'
+        #   type: choice
+        #   options:
+        #     - feature/model-deploy
+        #     - main
         
 
 jobs:
