@@ -7,6 +7,7 @@ on:
     #         - feature/*
     # Allow to run this workflow manually from the Actions Tab
     workflow_dispatch:
+    # Allow to run this workflow manually from the Actions Tab with inputs
       inputs:
         # For selecting the environment to run the workflow
         target_env:
@@ -17,14 +18,16 @@ on:
           options:
             - dev
             - prod
+
         # For selecting the Branch to run the workflow
         target_branch:
           description: 'select the branch'
           required: true
-          default: 'main'
+          default: 'feature/model-deploy'
           type: choice
           options:
             - feature/model-deploy
+            - main
         
 
 jobs:
