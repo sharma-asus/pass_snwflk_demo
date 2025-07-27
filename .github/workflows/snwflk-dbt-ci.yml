@@ -8,6 +8,7 @@ on:
     # Allow to run this workflow manually from the Actions Tab
     workflow_dispatch:
       inputs:
+        # For selecting the environment to run the workflow
         target_env:
           description: 'select the environment'
           required: true
@@ -16,6 +17,15 @@ on:
           options:
             - dev
             - prod
+        # For selecting the Branch to run the workflow
+        target_branch:
+          description: 'select the branch'
+          required: true
+          default: 'main'
+          type: choice
+          options:
+            - feature/model-deploy
+        
 
 jobs:
     dbt-ci-jobs:
