@@ -68,6 +68,11 @@ jobs:
                 source dbt-env/bin/activate
                 dbt run --select my_first_dbt_model --profiles-dir ~/.dbt --target dev
 
+            - name: Run & Full refresh
+              run: |
+                source dbt-env/bin/activate
+                dbt run --full-refresh --profiles-dir ~/.dbt --target dev
+
             # - name: Running the shell script
             #   shell: bash
             #   run: |
