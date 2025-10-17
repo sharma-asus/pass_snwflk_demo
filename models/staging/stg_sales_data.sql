@@ -6,14 +6,6 @@
     incremental_strategy='merge'
 ) }}
 
--- Get the max updated_at from the existing table
-{% if is_incremental() %}
-with max_existing as (
-    select max(updated_at) as max_updated_at
-    from {{ this }}
-)
-{% endif %}
-
 select
     id,
     product_name,
