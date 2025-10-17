@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: analytics
+    database: dbt_demo
+    schema: analytics
+    tables:
+      - name: sales_data
+
+models:
+  - name: stg_sales_data
+    columns:
+      - name: id
+        tests:
+          - not_null
+      - name: product_name
+        tests:
+          - not_null
+      - name: revenue
+        tests:
+          - not_null
+          - greater_than: 0
