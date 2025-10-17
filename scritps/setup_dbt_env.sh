@@ -70,6 +70,7 @@ pass_snwflk_demo:
       role: ${SNOWFLAKE_ROLE}
       database: ${SNOWFLAKE_DATABASE}
       warehouse: ${SNOWFLAKE_WAREHOUSE}
+      private_key_passphrase: ${SNOWFLAKE_PRIVATE_KEY_PASSPHRASE}
       schema: ${SNOWFLAKE_SCHEMA}
       private_key: |
 $(echo "${SNOWFLAKE_PRIVATE_KEY_RAW}" | sed 's/^/        /')
