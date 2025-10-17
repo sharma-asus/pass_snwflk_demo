@@ -66,7 +66,7 @@ jobs:
             - name: Run DBT Model
               run: |
                 source dbt-env/bin/activate
-                dbt run --select my_first_dbt_model --profiles-dir ~/.dbt --target dev --select tag:incremental
+                dbt run --profiles-dir ~/.dbt --target dev --select stg_sales_data
 
             # - name: Run & Full refresh
             #   run: |

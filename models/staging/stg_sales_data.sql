@@ -6,17 +6,24 @@
     incremental_strategy='merge'
 ) }}
 
-SELECT
+-- Get the max updated_at from the existing table
+{% if is_incremental() %}
+with max_existing as (
+    select max(updated_at) as max_updated_at
+    from {{ this }}
+)
+{% endif %}
+
+select
     id,
     product_name,
     category,
     quantity_sold,
     sale_date,
     revenue,
-    CURRENT_TIMESTAMP() AS updated_at
-FROM {{ source('analytics', 'sales_data') }}
+    current_timestamp() as updated_at
+from {{ source('analytics', 'sales_data') }}
 
 {% if is_incremental() %}
-WHERE sale_date > (SELECT MAX(sale_date) FROM {{ this }})
-  OR updated_at > (SELECT MAX(updated_at) FROM {{ this }})
+where updated_at > (select max_updated_at from max_existing)
 {% endif %}
