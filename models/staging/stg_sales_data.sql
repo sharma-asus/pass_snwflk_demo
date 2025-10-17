@@ -24,6 +24,6 @@ select
     current_timestamp() as updated_at
 from {{ source('analytics', 'sales_data') }}
 
-{% if is_incremental() %}
-where updated_at > (select max_updated_at from max_existing)
-{% endif %}
+-- {% if is_incremental() %}
+-- where updated_at > (select max_updated_at from max_existing)
+-- {% endif %}
