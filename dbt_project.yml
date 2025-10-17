@@ -2,7 +2,7 @@ name: dbt_demo
 version: '1.0'
 config-version: 2
 
-profile: dbt_demo
+profile: pass_snwflk_demo
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]
