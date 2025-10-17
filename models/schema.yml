@@ -11,12 +11,14 @@ models:
   - name: stg_sales_data
     columns:
       - name: id
-        tests:
+        data_tests:
+          - unique
           - not_null
       - name: product_name
-        tests:
+        data_tests:
           - not_null
+          - unique
       - name: revenue
-        tests:
+        data_tests:
           - not_null
           - greater_than: 0
