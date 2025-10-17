@@ -21,4 +21,5 @@ models:
       - name: revenue
         data_tests:
           - not_null
-          - greater_than: 0
+          - greater_than:
+              value: 0
